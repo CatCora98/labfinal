@@ -1,4 +1,4 @@
-package com.example.bookcase;
+package com.temple.edu.bookcase;
 
 import org.junit.Test;
 

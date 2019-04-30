@@ -1,22 +1,19 @@
-package com.example.bookcase;
+package com.temple.edu.bookcase;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class BookAdapter extends BaseAdapter implements Filterable {
-
+public class BookAdapter extends BaseAdapter {
     Context c;
-    ArrayList<Book> books ;
+    ArrayList<Book> books;
 
-    public BookAdapter(Context context, ArrayList<Book> books) {
-        this.c = context;
+    public BookAdapter(Context c, ArrayList<Book> books){
+        this.c = c;
         this.books = books;
     }
 
@@ -37,15 +34,9 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        TextView textView = new TextView(c);
+        textView.setText(books.get(position).getTitle());
 
-        TextView tv = new TextView(c);
-        tv.setText(books.get(position).getTitle());
-        tv.setTextSize(24);
-        return tv;
-    }
-
-    @Override
-    public Filter getFilter() {
-        return null;
+        return textView;
     }
 }
