@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     BookListFragment lFragment;
 
     Button button;
+    ImageButton downloadButton;
+    ImageButton deleteButton;
     EditText searchBar;
     String userSearch;
 
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         lFragment = new BookListFragment();
         vpFragment = new ViewPagerFragment();
@@ -87,17 +92,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     addToBackStack(null).
                     commit();
         }
-        /*
-        getBooks(userSearch);
 
-        if(bookList != null){
-            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                vpFragment.updateViewPager(bookList);
-            }
-            else {
-                lFragment.setBookList(bookList);
-            }
-        }*/
+
+        Log.d("OnCreate: MainActivity: ", "Setup completed");
 
 
         // button listener that passes the input string as parameter and return new json array
@@ -117,10 +114,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
             }
         });
+
     }
 
     public void getBooks(final String search) {
         Thread IOThread;
+
+
+        Log.d("getBooks(): ", "Started");
 
         IOThread = new Thread(new Runnable() {
             @Override
@@ -155,13 +156,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     e.printStackTrace();
                 }
 
-                Log.d("GET JSON: ", jsonBookString.toString());
-
-                // Convert StringBuilder to String to pass to jsonArray constructor
-
-
-
-
+                Log.d("getBooks() Return: ", jsonBookString.toString());
             }
         });
 
